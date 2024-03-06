@@ -1,0 +1,6 @@
+# Ignore all venv files
+.venv/
+# Ignore all vscode files
+.vscode/
+# Ignore pycache
+__pycache__/
