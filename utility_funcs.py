@@ -95,13 +95,16 @@ def transform_image(image_file):
     image_batch = image_transformed.unsqueeze(0)  # Add a batch dimension
     return image_batch
 
-def load_retrain_model():
+def load_retrain_model(model_type):
     class ReTrainModel(nn.Module):
         def __init__(self):
             super(ReTrainModel, self).__init__()
 
             # Load pre-trained pretrained model
-            self.pretrain_net = models.alexnet()
+            if model_type == 'AlexNet':
+                self.pretrain_net = models.alexnet()
+            if model_type == 'VGG11':
+                self.pretrain_net = models.vgg11()
             
             # Freeze the pretrained model parameters
             for param in self.pretrain_net.parameters():
@@ -125,7 +128,11 @@ def load_retrain_model():
     
     model = ReTrainModel()
     
-    model_path = Path.cwd() / "stilted-totem-49_20240306_081830.pth"
+    if model_type == 'AlexNet':
+        model_path = Path.cwd() / "stilted-totem-49_20240306_081830.pth"
+    if model_type == 'VGG11':
+        model_path = Path.cwd() / "happy-sweep-23_20240303_020152.pth"
+        
     model_checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
     model.load_state_dict(model_checkpoint)
     

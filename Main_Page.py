@@ -19,6 +19,7 @@ col1, col2, col3 = st.columns([1,1,1])
 
 # Data Input options
 with col1:
+    model_selection = st.radio(label='Model Type', options=['VGG11', 'AlexNet'])
     st.header('Try an Example Photo')
     ex_butt = st.button(f'See Another Example Photo')
 
@@ -37,7 +38,7 @@ def run_and_display_model(image_to_use, caption):
             # Transform the image for the model
             image_for_model = transform_image(image_to_use)
 
-            model = load_retrain_model()    
+            model = load_retrain_model(model_selection)    
             model.eval()  # Set the model to evaluation mode
             with torch.no_grad():
                 probabilities, prob_list_raw = predict_from_model(model, image_for_model)
