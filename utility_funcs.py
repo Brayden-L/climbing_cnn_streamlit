@@ -17,7 +17,7 @@ The idea is to classify climbing images, so to group images into topos, butt-sho
 
 You may select from example images or upload your own.
 
-I used a re-trained ImageNet pre-trained VGG11 model. Hyper-parameter optimization was done using Weights and Biases sweeps, with most gains coming from learning rate scheduling and light use of weight decay.
+I used a re-trained ImageNet pre-trained AlexNet and VGG11 model. AlexNet is a smaller simper model, but I was able to get the best balance of model complexity and performance with VGG11. Hyper-parameter optimization was done using Weights and Biases sweeps, with most gains coming from learning rate scheduling and light use of weight decay.
 
 You can read an in-depth report [here](https://brayden-l.github.io/).
 """
