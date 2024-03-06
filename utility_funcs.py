@@ -95,13 +95,13 @@ def transform_image(image_file):
     image_batch = image_transformed.unsqueeze(0)  # Add a batch dimension
     return image_batch
 
-def load_retrain_vgg11():
-    class ReTrainVGG11(nn.Module):
+def load_retrain_model():
+    class ReTrainModel(nn.Module):
         def __init__(self):
-            super(ReTrainVGG11, self).__init__()
+            super(ReTrainModel, self).__init__()
 
             # Load pre-trained pretrained model
-            self.pretrain_net = models.vgg11(pretrained=True)
+            self.pretrain_net = models.alexnet(pretrained=False)
             
             # Freeze the pretrained model parameters
             for param in self.pretrain_net.parameters():
@@ -123,9 +123,9 @@ def load_retrain_vgg11():
             out = self.classifier(features) # Then the custom classifier
             return out
     
-    model = ReTrainVGG11()
+    model = ReTrainModel()
 
-    model_checkpoint = torch.load(r'.\confused-sweep-17_20240302_231256.pth', map_location=torch.device('cpu'))
+    model_checkpoint = torch.load(r'.\driven-sweep-31_20240301_122513.pth', map_location=torch.device('cpu'))
     model.load_state_dict(model_checkpoint)
     
     return model

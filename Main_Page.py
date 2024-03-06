@@ -37,7 +37,7 @@ def run_and_display_model(image_to_use, caption):
             # Transform the image for the model
             image_for_model = transform_image(image_to_use)
 
-            model = load_retrain_vgg11()    
+            model = load_retrain_model()    
             model.eval()  # Set the model to evaluation mode
             with torch.no_grad():
                 probabilities, prob_list_raw = predict_from_model(model, image_for_model)
