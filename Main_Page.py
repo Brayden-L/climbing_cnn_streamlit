@@ -31,7 +31,7 @@ def run_and_display_model(image_to_use, caption):
     display_image = resize_image_object_to_height(display_image, 400)
     with col2:
         st.image(display_image, caption='')
-        st.write(img_caption)
+        st.write(caption)
     with col3:
         with st.spinner('Running Model'):
             # Transform the image for the model
