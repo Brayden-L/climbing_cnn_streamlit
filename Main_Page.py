@@ -19,7 +19,7 @@ col1, col2, col3 = st.columns([1,1,1])
 
 # Data Input options
 with col1:
-    model_selection = st.radio(label='Model Type', options=['VGG11', 'AlexNet'])
+    model_selection = st.radio(label='Model Type', options=['VGG11', 'AlexNet'], help='VGG11 is a more accurate model, AlexNet is a simpler model.')
     st.header('Try an Example Photo')
     ex_butt = st.button(f'See Another Example Photo')
 
