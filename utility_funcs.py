@@ -101,7 +101,7 @@ def load_retrain_model():
             super(ReTrainModel, self).__init__()
 
             # Load pre-trained pretrained model
-            self.pretrain_net = models.alexnet(pretrained=False)
+            self.pretrain_net = models.alexnet()
             
             # Freeze the pretrained model parameters
             for param in self.pretrain_net.parameters():
@@ -125,7 +125,7 @@ def load_retrain_model():
     
     model = ReTrainModel()
 
-    model_checkpoint = torch.load(r'.\driven-sweep-31_20240301_122513.pth', map_location=torch.device('cpu'))
+    model_checkpoint = torch.load(r'.\stilted-totem-49_20240306_081830.pth', map_location=torch.device('cpu'))
     model.load_state_dict(model_checkpoint)
     
     return model
