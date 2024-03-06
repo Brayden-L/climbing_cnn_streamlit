@@ -23,7 +23,7 @@ with col1:
     ex_butt = st.button(f'See Another Example Photo')
 
     st.header('Upload Your Own Photo')
-    uploaded_file = st.file_uploader(label='', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
+    uploaded_file = st.file_uploader(label='Upload', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
 
 # Model run and display results function
 def run_and_display_model(image_to_use, caption):

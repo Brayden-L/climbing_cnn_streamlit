@@ -124,8 +124,9 @@ def load_retrain_model():
             return out
     
     model = ReTrainModel()
-
-    model_checkpoint = torch.load(r'.\stilted-totem-49_20240306_081830.pth', map_location=torch.device('cpu'))
+    
+    model_path = Path.cwd() / "stilted-totem-49_20240306_081830.pth"
+    model_checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
     model.load_state_dict(model_checkpoint)
     
     return model
