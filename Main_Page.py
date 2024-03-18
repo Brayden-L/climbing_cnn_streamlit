@@ -26,11 +26,14 @@ with col1:
 
     st.header('Upload Your Own Photo')
     uploaded_file = st.file_uploader(label='Upload', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
+<<<<<<< HEAD
     if uploaded_file:
         try:
             uploaded_file = ImageOps.exif_transpose(uploaded_file) # Rotates uploaded iphone photos to correct orientation.
         except:
             pass
+=======
+>>>>>>> 5870502ad9418d234e578d15faad4dc826831b13
 
 # Model run and display results function
 def run_and_display_model(image_to_use, caption):
