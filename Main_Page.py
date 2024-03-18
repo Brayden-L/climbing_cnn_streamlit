@@ -73,16 +73,7 @@ if ex_butt:
     run_and_display_model(ex_img, img_caption)
 
 if uploaded_file is not None:
-    # Rotate the file if it has exif data
-    uploaded_file_rot = Image.open(uploaded_file)
-    if uploaded_file_rot._getexif():
-        uploaded_file_rot = ImageOps.exif_transpose(uploaded_file_rot)
-    else:
-        pass
-    
-    # Re-save file to bytestream, which is what the streamlit file-upload type is
-    uploaded_file_rot_bytestream = BytesIO()
-    uploaded_file_rot.save(uploaded_file_rot_bytestream, format='JPEG')
+    uploaded_file_rotated = exif_rotate(uploaded_file) # Rotate file if it has exif data
     
     img_caption = 'Uploaded Image'
-    run_and_display_model(uploaded_file_rot_bytestream, img_caption)
+    run_and_display_model(uploaded_file_rotated, img_caption)

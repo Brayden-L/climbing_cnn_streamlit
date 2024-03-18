@@ -4,9 +4,10 @@ from torch import nn
 from torchvision import models
 from torchvision.transforms import transforms
 import torch.nn.functional as F
-from PIL import Image
+from PIL import Image, ImageOps
 from pathlib import Path
 from natsort import natsorted
+from io import BytesIO
 
 help_text = """
 This is a demonstration of a convolutional neural network I trained to classify climbing images.
@@ -75,6 +76,20 @@ def resize_image_object_to_height(img, new_height):
     resized_img = img.resize((new_width, new_height))
 
     return resized_img
+
+def exif_rotate(image_file):
+    # Rotate the file if it has exif data
+    image_rot = Image.open(image_file)
+    if image_rot._getexif():
+        image_rot = ImageOps.exif_transpose(image_rot)
+    else:
+        pass
+    
+    # Re-save file to bytestream, which is what the streamlit file-upload type is
+    image_rot_bytestream = BytesIO()
+    image_rot.save(image_rot_bytestream, format='JPEG')
+    
+    return image_rot_bytestream
 
 def transform_image(image_file):
     # Define the transformations
