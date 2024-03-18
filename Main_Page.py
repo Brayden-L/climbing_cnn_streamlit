@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from utility_funcs import *
 from PIL import Image, ImageOps
+from io import BytesIO
 
 # Get list of pre-provided images
 included_imgs = list_images_in_folder(r'./images')
@@ -26,24 +27,16 @@ with col1:
 
     st.header('Upload Your Own Photo')
     uploaded_file = st.file_uploader(label='Upload', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
-    if uploaded_file is not None:
-        try:
-            print('exif_rotating')
-            uploaded_file = ImageOps.exif_transpose(uploaded_file) # Rotates uploaded iphone photos to correct orientation.
-        except Exception as e:
-            print(e)
-    if uploaded_file is not None:
-        rotate_button = st.button(label="Rotate Button")
-        if rotate_button:
-            uploaded_file = uploaded_file.rotate(90)
 
 # Model run and display results function
 def run_and_display_model(image_to_use, caption):
     display_image = Image.open(image_to_use)
     display_image = resize_image_object_to_height(display_image, 400)
+    
     with col2:
         st.image(display_image, caption='')
         st.write(caption)
+    
     with col3:
         with st.spinner('Running Model'):
             # Transform the image for the model
@@ -80,5 +73,16 @@ if ex_butt:
     run_and_display_model(ex_img, img_caption)
 
 if uploaded_file is not None:
+    # Rotate the file if it has exif data
+    uploaded_file_rot = Image.open(uploaded_file)
+    if uploaded_file_rot._getexif():
+        uploaded_file_rot = ImageOps.exif_transpose(uploaded_file_rot)
+    else:
+        pass
+    
+    # Re-save file to bytestream, which is what the streamlit file-upload type is
+    uploaded_file_rot_bytestream = BytesIO()
+    uploaded_file_rot.save(uploaded_file_rot_bytestream, format='JPEG')
+    
     img_caption = 'Uploaded Image'
-    run_and_display_model(uploaded_file, img_caption)
+    run_and_display_model(uploaded_file_rot_bytestream, img_caption)
