@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 from utility_funcs import *
+from PIL import ImageOps
 
 # Get list of pre-provided images
 included_imgs = list_images_in_folder(r'./images')
@@ -25,6 +26,11 @@ with col1:
 
     st.header('Upload Your Own Photo')
     uploaded_file = st.file_uploader(label='Upload', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
+    if uploaded_file:
+        try:
+            uploaded_file = ImageOps.exif_transpose(uploaded_file) # Rotates uploaded iphone photos to correct orientation.
+        except:
+            pass
 
 # Model run and display results function
 def run_and_display_model(image_to_use, caption):
