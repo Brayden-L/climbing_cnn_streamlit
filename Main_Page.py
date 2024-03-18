@@ -26,12 +26,12 @@ with col1:
 
     st.header('Upload Your Own Photo')
     uploaded_file = st.file_uploader(label='Upload', accept_multiple_files=False, help='No grayscale photos, RGB only! .JPG preferred.')
-    if uploaded_file:
+    if uploaded_file is not None:
         try:
             uploaded_file = ImageOps.exif_transpose(uploaded_file) # Rotates uploaded iphone photos to correct orientation.
         except Exception as e:
             print(e)
-    if uploaded_file:
+    if uploaded_file is not None:
         rotate_button = st.button(label="Rotate Button")
         if rotate_button:
             uploaded_file = Image.ROTATE_90(uploaded_file)
