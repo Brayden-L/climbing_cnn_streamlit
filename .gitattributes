@@ -1,1 +1,3 @@
 *.pth filter=lfs diff=lfs merge=lfs -text
+C:/Users/Brayden/Desktop/climbing_cnn_deploy/happy-sweep-23_20240303_020152.pth filter=lfs diff=lfs merge=lfs -text
+C:/Users/Brayden/Desktop/climbing_cnn_deploy/stilted-totem-49_20240306_081830.pth filter=lfs diff=lfs merge=lfs -text
