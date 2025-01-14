@@ -25,7 +25,7 @@ with col1:
     st.header('Try an Example Photo')
     ex_butt = st.button(f'See Another Example Photo')
 
-    st.header('Upload Your Own Photo')
+    st.header('Upload Your Own Photo (JPG Only)')
     uploaded_file = st.file_uploader(label='Upload', type="jpg", accept_multiple_files=False, help='JPG only, no greyscale.')
 
 # Model run and display results function
